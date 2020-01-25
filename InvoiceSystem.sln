@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceSystem.Test", "Invoi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceSystem.Infrastructure", "InvoiceSystem.Infrastructure\InvoiceSystem.Infrastructure.csproj", "{DD1E42E1-02CD-4D64-87C7-9559B1C835F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceSystem.Clinet", "InvoiceSystem.Clinet\InvoiceSystem.Clinet.csproj", "{7EBBF236-BBC0-44FA-81AE-A972813D2B09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,5 +33,9 @@ Global
 		{DD1E42E1-02CD-4D64-87C7-9559B1C835F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD1E42E1-02CD-4D64-87C7-9559B1C835F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD1E42E1-02CD-4D64-87C7-9559B1C835F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EBBF236-BBC0-44FA-81AE-A972813D2B09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EBBF236-BBC0-44FA-81AE-A972813D2B09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EBBF236-BBC0-44FA-81AE-A972813D2B09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EBBF236-BBC0-44FA-81AE-A972813D2B09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
