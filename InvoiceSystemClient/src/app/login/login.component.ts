@@ -12,11 +12,12 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
+  form: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
   error = '';
+  isError: boolean;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
       private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
-      this.loginForm = this.formBuilder.group({
+      this.form = this.formBuilder.group({
           username: ['', Validators.required],
           password: ['', Validators.required]
       });
@@ -38,13 +39,13 @@ export class LoginComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
+  get f() { return this.form.controls; }
 
     onSubmit() {
         this.submitted = true;
 
         // stop here if form is invalid
-        if (this.loginForm.invalid) {
+        if (this.form.invalid) {
             return;
         }
 
@@ -58,6 +59,7 @@ export class LoginComponent implements OnInit {
                 error => {
                     this.error = error;
                     this.loading = false;
+                    this.isError = true;
                 });
     }
 }
