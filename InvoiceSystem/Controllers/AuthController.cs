@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using InvoiceSystem.Business.Models;
+using InvoiceSystem.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -16,6 +16,13 @@ namespace InvoiceSystem.Controllers
     [Route("api/[controller]")]
     public class AuthController : Controller
     {
+        private readonly IAuthenticationService authenticationService;
+
+        public AuthController(IAuthenticationService _authenticationService)
+        {
+            authenticationService = _authenticationService;
+        }
+
         [HttpPost, Route("login")]
         public IActionResult Login([FromBody]LoginModel user)
         {
@@ -24,25 +31,14 @@ namespace InvoiceSystem.Controllers
                 return BadRequest("Invalid client request");
             }
 
-            if (user.UserName == "johndoe" && user.Password == "def@123")
-            {
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
-                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+            var token = authenticationService.AuthenticateUser(user);
 
-                var tokeOptions = new JwtSecurityToken(
-                    issuer: "http://localhost:5000",
-                    audience: "http://localhost:5000",
-                    claims: new List<Claim>(),
-                    expires: DateTime.Now.AddMinutes(5),
-                    signingCredentials: signinCredentials
-                );
-
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-                return Ok(new { Token = tokenString });
-            }
-            else
+            if (String.IsNullOrEmpty(token))
             {
                 return Unauthorized();
+            } else
+            {
+                return Ok(new { Token = token });
             }
         }
     }

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace InvoiceSystem.Business.Models
+namespace InvoiceSystem.Business
 {
     public class LoginModel
     {

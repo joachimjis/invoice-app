@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'InvoiceSystemClient';
+  title = 'Iaora Web Solutions';
 
   constructor(private httpClient: HttpClient) {
 
