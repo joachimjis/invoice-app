@@ -12,12 +12,4 @@ export class AppComponent {
   constructor(private httpClient: HttpClient) {
 
   }
-
-  test() {
-    alert('hey');
-    this.httpClient.get('https://localhost:5001/weatherforecast').subscribe((res)=>{
-      console.log(res);
-      alert(res);
-  });
-  }
 }
