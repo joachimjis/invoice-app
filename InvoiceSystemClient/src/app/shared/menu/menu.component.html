@@ -1,0 +1,17 @@
+<header class="header-6" *ngIf="isLoggedIn$ | async as isLoggedIn">
+    <div class="branding">
+        Iaora Web Solutions
+    </div>
+    <div class="header-nav">
+        <a href="javascript://" class="active nav-link nav-text">Facturation</a>
+        <a href="javascript://" class="nav-link nav-text">Client</a>
+    </div>
+    <div class="header-actions">
+        <a href="javascript://" class="nav-link nav-icon" aria-label="settings" routerLink="/parameter" routerLinkActive="active">
+            <clr-icon shape="cog"></clr-icon>
+        </a>
+        <a href="javascript://" class="nav-link nav-icon" aria-label="logout" (click)="logOut()">
+            <clr-icon shape="logout"></clr-icon>
+        </a>
+    </div>
+</header>
