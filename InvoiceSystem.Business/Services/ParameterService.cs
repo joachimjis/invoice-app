@@ -17,7 +17,7 @@ namespace InvoiceSystem.Business.Services
         public async Task<ParameterModel> GetCompanyParameterAsync() =>
             await _parameterRepository.GetParameterAsync();
 
-        public async Task UpdateCompanyParameterAsync(ParameterModel model) =>
-            await _parameterRepository.UpdateParameterAsync(model);
+        public async Task UpdateCompanyParameterAsync(int id, ParameterModel model) =>
+            await _parameterRepository.UpdateParameterAsync(id, model);
     }
 }

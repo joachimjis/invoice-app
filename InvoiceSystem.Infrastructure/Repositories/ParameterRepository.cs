@@ -34,9 +34,9 @@ namespace InvoiceSystem.Infrastructure.Repositories
             };
         }
 
-        public async Task UpdateParameterAsync(ParameterModel model)
+        public async Task UpdateParameterAsync(int id, ParameterModel model)
         {
-            var parameter = await _context.Parametres.FirstOrDefaultAsync();
+            var parameter = await _context.Parametres.FindAsync(id);
             parameter.Adresse = model.Adresse;
             parameter.CodePostal = model.CodePostal;
             parameter.Email = model.Email;

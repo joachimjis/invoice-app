@@ -8,6 +8,6 @@ namespace InvoiceSystem.Business.IRepository
     {
         Task<ParameterModel> GetParameterAsync();
 
-        Task UpdateParameterAsync(ParameterModel model);
+        Task UpdateParameterAsync(int id, ParameterModel model);
     }
 }
