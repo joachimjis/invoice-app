@@ -34,22 +34,6 @@ namespace InvoiceSystem.Infrastructure.Repositories
             };
         }
 
-        public async Task InsertParameterAsync(ParameterModel model)
-        {
-            await _context.Parametres.AddAsync(new Parametre
-            {
-                Adresse = model.Adresse,
-                CodePostal = model.CodePostal,
-                Email = model.Email,
-                LieuPostal = model.LieuPostal,
-                NomSociete = model.NomSociete,
-                NumeroTelephone = model.NumeroTelephone,
-                Rib = model.Rib
-            });
-
-            await _context.SaveChangesAsync();
-        }
-
         public async Task UpdateParameterAsync(ParameterModel model)
         {
             var parameter = await _context.Parametres.FirstOrDefaultAsync();

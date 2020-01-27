@@ -64,21 +64,6 @@ namespace InvoiceSystem.Test
             Assert.Equal(expected.LieuPostal, actual.LieuPostal);
         }
 
-        [Fact]
-        public async Task Should_Insert_ParameterAsync()
-        {
-            // arrange
-            var expected = Builder<ParameterModel>.CreateNew().Build();
-
-            // act
-            await _sut.InsertParameterAsync(expected);
-
-            // assert
-            var actual = _context.Parametres.FirstOrDefault();
-
-            AssertParameters(expected, actual);
-        }
-
         //[Fact]
         //public async Task Should_Update_ParameterAsync()
         //{
