@@ -1,3 +1,4 @@
+import { ParameterComponent } from './parameter/parameter.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,6 +10,7 @@ import { AuthGuard } from './guards/authguard.service';
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'parameter', component: ParameterComponent, canActivate: [AuthGuard] },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

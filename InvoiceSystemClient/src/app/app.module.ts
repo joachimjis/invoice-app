@@ -12,6 +12,8 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ParameterComponent } from './parameter/parameter.component';
+import { MenuComponent } from './shared/menu/menu.component';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -22,7 +24,9 @@ export function tokenGetter() {
     AppComponent,
     LoginComponent,
     HomeComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    ParameterComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
