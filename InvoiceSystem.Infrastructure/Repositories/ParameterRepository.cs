@@ -24,12 +24,12 @@ namespace InvoiceSystem.Infrastructure.Repositories
             return new ParameterModel
             {
                 ParametreId = parameter.ParametreId,
-                NomSociete = parameter.NomSociete,
-                Adresse = parameter.Adresse,
-                CodePostal = parameter.CodePostal,
+                CompanyName = parameter.NomSociete,
+                Address = parameter.Adresse,
+                PostalCode = parameter.CodePostal,
                 Email = parameter.Email,
-                LieuPostal = parameter.LieuPostal,
-                NumeroTelephone = parameter.NumeroTelephone,
+                PostalPlace = parameter.LieuPostal,
+                Telephone = parameter.NumeroTelephone,
                 Rib = parameter.Rib
             };
         }
@@ -37,12 +37,12 @@ namespace InvoiceSystem.Infrastructure.Repositories
         public async Task UpdateParameterAsync(int id, ParameterModel model)
         {
             var parameter = await _context.Parametres.FindAsync(id);
-            parameter.Adresse = model.Adresse;
-            parameter.CodePostal = model.CodePostal;
+            parameter.Adresse = model.Address;
+            parameter.CodePostal = model.PostalCode;
             parameter.Email = model.Email;
-            parameter.LieuPostal = model.LieuPostal;
-            parameter.NomSociete = model.NomSociete;
-            parameter.NumeroTelephone = model.NumeroTelephone;
+            parameter.LieuPostal = model.PostalPlace;
+            parameter.NomSociete = model.CompanyName;
+            parameter.NumeroTelephone = model.Telephone;
             parameter.Rib = model.Rib;
 
             _context.Parametres.Update(parameter);

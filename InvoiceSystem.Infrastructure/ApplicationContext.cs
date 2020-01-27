@@ -14,5 +14,7 @@ namespace InvoiceSystem.Infrastructure
         public DbSet<Client> Clients { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceLine> InvoiceLines { get; set; }
+
+
     }
 }

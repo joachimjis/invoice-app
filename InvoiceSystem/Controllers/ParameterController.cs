@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InvoiceSystem.Controllers
 {
-    [Authorize]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     public class ParameterController : Controller
     {

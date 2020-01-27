@@ -39,13 +39,13 @@ namespace InvoiceSystem.Test
 
             await _context.Parametres.AddAsync(new Parametre
             {
-                NomSociete = expected.NomSociete,
+                NomSociete = expected.CompanyName,
                 ParametreId = expected.ParametreId,
-                Adresse = expected.Adresse,
-                CodePostal = expected.CodePostal,
+                Adresse = expected.Address,
+                CodePostal = expected.PostalCode,
                 Email = expected.Email,
-                LieuPostal = expected.LieuPostal,
-                NumeroTelephone = expected.NumeroTelephone,
+                LieuPostal = expected.PostalPlace,
+                NumeroTelephone = expected.Telephone,
                 Rib = expected.Rib
             });
 
@@ -55,13 +55,13 @@ namespace InvoiceSystem.Test
             var actual = await _sut.GetParameterAsync();
 
             // assert
-            Assert.Equal(expected.NomSociete, actual.NomSociete);
-            Assert.Equal(expected.NumeroTelephone, actual.NumeroTelephone);
+            Assert.Equal(expected.CompanyName, actual.CompanyName);
+            Assert.Equal(expected.Telephone, actual.Telephone);
             Assert.Equal(expected.Rib, actual.Rib);
-            Assert.Equal(expected.Adresse, actual.Adresse);
-            Assert.Equal(expected.CodePostal, actual.CodePostal);
+            Assert.Equal(expected.Address, actual.Address);
+            Assert.Equal(expected.PostalCode, actual.PostalCode);
             Assert.Equal(expected.Email, actual.Email);
-            Assert.Equal(expected.LieuPostal, actual.LieuPostal);
+            Assert.Equal(expected.PostalPlace, actual.PostalPlace);
         }
 
         //[Fact]
@@ -112,13 +112,13 @@ namespace InvoiceSystem.Test
 
         private void AssertParameters(ParameterModel expected, Parametre actual)
         {
-            Assert.Equal(expected.NomSociete, actual.NomSociete);
-            Assert.Equal(expected.NumeroTelephone, actual.NumeroTelephone);
+            Assert.Equal(expected.CompanyName, actual.NomSociete);
+            Assert.Equal(expected.Telephone, actual.NumeroTelephone);
             Assert.Equal(expected.Rib, actual.Rib);
-            Assert.Equal(expected.Adresse, actual.Adresse);
-            Assert.Equal(expected.CodePostal, actual.CodePostal);
+            Assert.Equal(expected.Address, actual.Adresse);
+            Assert.Equal(expected.PostalCode, actual.CodePostal);
             Assert.Equal(expected.Email, actual.Email);
-            Assert.Equal(expected.LieuPostal, actual.LieuPostal);
+            Assert.Equal(expected.PostalPlace, actual.LieuPostal);
         }
     }
 }

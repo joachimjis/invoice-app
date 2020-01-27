@@ -1,1 +1,78 @@
-<p>parameter works!</p>
+
+<h3>Paramètres</h3>
+
+<form class="clr-form" [formGroup]="form" (ngSubmit)="save()">
+    <div class="clr-form-control">
+        <label class="clr-control-label">Nom Société :</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Remplir le nom de société" class="clr-input" formControlName="companyName"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">Adresse :</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Remplir l'adresse" class="clr-input" formControlName="address"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">Code postal :</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Remplir le code postal" class="clr-input" formControlName="postalCode"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">Lieu postal :</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Remplir le lieu postal" class="clr-input" formControlName="postalPlace"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">Téléphone :</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Saisir le téléphone" class="clr-input" formControlName="telephone"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">Email :</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Remplir l'email" class="clr-input" formControlName="email"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">RIB :</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Saisir le Rib" class="clr-input" formControlName="rib"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <button [clrLoading]="submitBtnState" type="submit" class="btn btn-success-outline">Enregistrer</button>
+    </div>
+</form>

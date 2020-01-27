@@ -9,15 +9,15 @@ namespace InvoiceSystem.Business.Models
 
         public int ParametreId { get; set; }
 
-        public string NomSociete { get; set; }
+        public string CompanyName { get; set; }
 
-        public string Adresse { get; set; }
+        public string Address { get; set; }
 
-        public string CodePostal { get; set; }
+        public string PostalCode { get; set; }
 
-        public string LieuPostal { get; set; }
+        public string PostalPlace { get; set; }
 
-        public int NumeroTelephone { get; set; }
+        public int Telephone { get; set; }
 
         public string Email { get; set; }
 
