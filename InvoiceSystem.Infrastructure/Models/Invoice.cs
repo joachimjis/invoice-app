@@ -26,5 +26,10 @@ namespace InvoiceSystem.Infrastructure.Models
         public int ClientId { get; set; }
 
         public Client Client { get; set; }
+
+        [Required]
+        public int UserId { get; set; }
+
+        public int User { get; set; }
     }
 }

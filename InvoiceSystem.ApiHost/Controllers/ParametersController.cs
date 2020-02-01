@@ -32,7 +32,7 @@ namespace InvoiceSystem.ApiHost.Controllers
         //    => _parameterService.UpdateCompanyParameterAsync(parameterId, model);
 
         [HttpGet]
-        public async Task<ParameterModel> GetAsync()
+        public ParameterModel Get()
         {
             return new ParameterModel();
         }

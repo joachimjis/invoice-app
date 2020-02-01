@@ -2,9 +2,11 @@ using System.Text;
 using InvoiceSystem.Business.Helpers;
 using InvoiceSystem.Business.IServices;
 using InvoiceSystem.Business.Services;
+using InvoiceSystem.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -24,6 +26,11 @@ namespace InvoiceSystem.ApiHost
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+
+            services.AddDbContext<ApplicationContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
+                x => x.MigrationsAssembly("InvoiceSystem.ApiHost")));
+
             services.AddControllers();
 
             // configure strongly typed settings objects

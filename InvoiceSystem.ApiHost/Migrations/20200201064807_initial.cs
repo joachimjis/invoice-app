@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace InvoiceSystem.Migrations
+namespace InvoiceSystem.ApiHost.Migrations
 {
     public partial class initial : Migration
     {
@@ -22,7 +22,9 @@ namespace InvoiceSystem.Migrations
                     AdressePhysique = table.Column<string>(nullable: false),
                     Commune = table.Column<string>(nullable: false),
                     Ile = table.Column<string>(nullable: true),
-                    Commentaire = table.Column<string>(nullable: true)
+                    Commentaire = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
+                    User = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,7 +43,9 @@ namespace InvoiceSystem.Migrations
                     LieuPostal = table.Column<string>(nullable: false),
                     NumeroTelephone = table.Column<int>(nullable: false),
                     Email = table.Column<string>(nullable: false),
-                    Rib = table.Column<string>(nullable: false)
+                    Rib = table.Column<string>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    User = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,7 +62,9 @@ namespace InvoiceSystem.Migrations
                     DateCreation = table.Column<DateTime>(nullable: false),
                     DateEcheance = table.Column<DateTime>(nullable: false),
                     Objet = table.Column<string>(nullable: false),
-                    ClientId = table.Column<int>(nullable: false)
+                    ClientId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    User = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

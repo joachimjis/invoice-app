@@ -29,5 +29,10 @@ namespace InvoiceSystem.Infrastructure.Models
         public string Ile { get; set; }
 
         public string Commentaire { get; set; }
+
+        [Required]
+        public int UserId { get; set; }
+
+        public int User { get; set; }
     }
 }

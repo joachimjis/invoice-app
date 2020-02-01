@@ -31,5 +31,10 @@ namespace InvoiceSystem.Infrastructure.Models
 
         [Required]
         public string Rib { get; set; }
+
+        [Required]
+        public int UserId { get; set; }
+
+        public int User { get; set; }
     }
 }

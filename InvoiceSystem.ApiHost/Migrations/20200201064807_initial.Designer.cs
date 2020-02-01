@@ -3,15 +3,17 @@ using System;
 using InvoiceSystem.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace InvoiceSystem.Migrations
+namespace InvoiceSystem.ApiHost.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20200201064807_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,6 +60,12 @@ namespace InvoiceSystem.Migrations
                     b.Property<string>("SecteurActivite")
                         .HasColumnType("text");
 
+                    b.Property<int>("User")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("ClientId");
 
                     b.ToTable("Clients");
@@ -86,6 +94,12 @@ namespace InvoiceSystem.Migrations
                     b.Property<string>("Objet")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("User")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("InvoiceId");
 
@@ -160,6 +174,12 @@ namespace InvoiceSystem.Migrations
                     b.Property<string>("Rib")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("User")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("ParametreId");
 
