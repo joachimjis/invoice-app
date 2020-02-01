@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using InvoiceSystem.ApiHost.Models;
-using InvoiceSystem.ApiHost.Services;
+﻿using InvoiceSystem.Business.IServices;
+using InvoiceSystem.Business.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FizzWare.NBuilder;
 using InvoiceSystem.Business;
 using InvoiceSystem.Business.IRepository;
 using InvoiceSystem.Business.Models;
-using InvoiceSystem.Business.Services;
-using InvoiceSystem.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Xunit;

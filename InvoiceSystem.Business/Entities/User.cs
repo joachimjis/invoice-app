@@ -1,5 +1,5 @@
 ﻿using System;
-namespace InvoiceSystem.ApiHost.Entities
+namespace InvoiceSystem.Business.Entities
 {
     public class User
     {
