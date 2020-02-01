@@ -21,7 +21,7 @@ namespace InvoiceSystem.ApiHost.Migrations
 
             modelBuilder.Entity("InvoiceSystem.Infrastructure.Models.Client", b =>
                 {
-                    b.Property<int>("ClientId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -58,20 +58,19 @@ namespace InvoiceSystem.ApiHost.Migrations
                     b.Property<string>("SecteurActivite")
                         .HasColumnType("text");
 
-                    b.Property<int>("User")
-                        .HasColumnType("integer");
-
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.HasKey("ClientId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("InvoiceSystem.Infrastructure.Models.Invoice", b =>
                 {
-                    b.Property<int>("InvoiceId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -93,22 +92,21 @@ namespace InvoiceSystem.ApiHost.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("User")
-                        .HasColumnType("integer");
-
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.HasKey("InvoiceId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("InvoiceSystem.Infrastructure.Models.InvoiceLine", b =>
                 {
-                    b.Property<int>("InvoiceLineId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -132,7 +130,7 @@ namespace InvoiceSystem.ApiHost.Migrations
                     b.Property<decimal>("Quantite")
                         .HasColumnType("numeric");
 
-                    b.HasKey("InvoiceLineId");
+                    b.HasKey("Id");
 
                     b.HasIndex("InvoiceId");
 
@@ -141,7 +139,7 @@ namespace InvoiceSystem.ApiHost.Migrations
 
             modelBuilder.Entity("InvoiceSystem.Infrastructure.Models.Parametre", b =>
                 {
-                    b.Property<int>("ParametreId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -179,9 +177,45 @@ namespace InvoiceSystem.ApiHost.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.HasKey("ParametreId");
+                    b.HasKey("Id");
 
                     b.ToTable("Parametres");
+                });
+
+            modelBuilder.Entity("InvoiceSystem.Infrastructure.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("InvoiceSystem.Infrastructure.Models.Client", b =>
+                {
+                    b.HasOne("InvoiceSystem.Infrastructure.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("InvoiceSystem.Infrastructure.Models.Invoice", b =>
@@ -189,6 +223,12 @@ namespace InvoiceSystem.ApiHost.Migrations
                     b.HasOne("InvoiceSystem.Infrastructure.Models.Client", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InvoiceSystem.Infrastructure.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

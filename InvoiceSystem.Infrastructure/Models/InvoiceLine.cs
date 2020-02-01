@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InvoiceSystem.Infrastructure.Models
 {
@@ -9,7 +10,9 @@ namespace InvoiceSystem.Infrastructure.Models
         {
         }
 
-        public int InvoiceLineId { get; set; }
+        public int Id { get; set; }
+
+        public int InvoiceId { get; set; }
 
         [Required]
         public string Libelle { get; set; }
@@ -26,9 +29,7 @@ namespace InvoiceSystem.Infrastructure.Models
         [Required]
         public decimal MontantTTC { get; set; }
 
-        [Required]
-        public int InvoiceId { get; set; }
-
+        [ForeignKey("InvoiceId")]
         public Invoice Invoice { get; set; }
     }
 }

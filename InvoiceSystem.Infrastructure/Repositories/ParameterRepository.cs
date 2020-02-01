@@ -21,9 +21,14 @@ namespace InvoiceSystem.Infrastructure.Repositories
         {
             var parameter = await _context.Parametres.FirstOrDefaultAsync();
 
+            if (parameter == null)
+            {
+                return new ParameterModel();
+            }
+
             return new ParameterModel
             {
-                ParametreId = parameter.ParametreId,
+                ParametreId = parameter.Id,
                 CompanyName = parameter.NomSociete,
                 Address = parameter.Adresse,
                 PostalCode = parameter.CodePostal,

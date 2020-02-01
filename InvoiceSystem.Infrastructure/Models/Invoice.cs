@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InvoiceSystem.Infrastructure.Models
 {
@@ -9,7 +10,9 @@ namespace InvoiceSystem.Infrastructure.Models
         {
         }
 
-        public int InvoiceId { get; set; }
+        public int Id { get; set; }
+
+        public int UserId { get; set; }
 
         [Required]
         public string NumeroFacture { get; set; }
@@ -27,9 +30,7 @@ namespace InvoiceSystem.Infrastructure.Models
 
         public Client Client { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
-
-        public int User { get; set; }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
     }
 }

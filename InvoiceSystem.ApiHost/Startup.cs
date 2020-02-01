@@ -1,8 +1,11 @@
 using System.Text;
+using InvoiceSystem.Business;
 using InvoiceSystem.Business.Helpers;
+using InvoiceSystem.Business.IRepository;
 using InvoiceSystem.Business.IServices;
 using InvoiceSystem.Business.Services;
 using InvoiceSystem.Infrastructure;
+using InvoiceSystem.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -60,6 +63,8 @@ namespace InvoiceSystem.ApiHost
 
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IParameterService, ParameterService>();
+            services.AddScoped<IParameterRepository, ParameterRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

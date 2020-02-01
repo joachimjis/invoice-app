@@ -1,11 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InvoiceSystem.Infrastructure.Models
 {
     public class Client
     {
-        public int ClientId { get; set; }
+        public int Id { get; set; }
+
+        public int UserId { get; set; }
 
         [Required]
         public string NomSociete { get; set; }
@@ -30,9 +33,7 @@ namespace InvoiceSystem.Infrastructure.Models
 
         public string Commentaire { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
-
-        public int User { get; set; }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
     }
 }

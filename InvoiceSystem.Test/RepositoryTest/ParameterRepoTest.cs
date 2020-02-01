@@ -40,7 +40,7 @@ namespace InvoiceSystem.Test
             await _context.Parametres.AddAsync(new Parametre
             {
                 NomSociete = expected.CompanyName,
-                ParametreId = expected.ParametreId,
+                Id = expected.ParametreId,
                 Adresse = expected.Address,
                 CodePostal = expected.PostalCode,
                 Email = expected.Email,

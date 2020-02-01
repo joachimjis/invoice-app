@@ -9,11 +9,50 @@ namespace InvoiceSystem.ApiHost.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Parametres",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(nullable: false),
+                    NomSociete = table.Column<string>(nullable: false),
+                    Adresse = table.Column<string>(nullable: false),
+                    CodePostal = table.Column<string>(nullable: false),
+                    LieuPostal = table.Column<string>(nullable: false),
+                    NumeroTelephone = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Rib = table.Column<string>(nullable: false),
+                    User = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Parametres", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Username = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    Token = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Clients",
                 columns: table => new
                 {
-                    ClientId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(nullable: false),
                     NomSociete = table.Column<string>(nullable: false),
                     NumeroTelephone = table.Column<int>(nullable: false),
                     Email = table.Column<string>(nullable: false),
@@ -22,58 +61,46 @@ namespace InvoiceSystem.ApiHost.Migrations
                     AdressePhysique = table.Column<string>(nullable: false),
                     Commune = table.Column<string>(nullable: false),
                     Ile = table.Column<string>(nullable: true),
-                    Commentaire = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false),
-                    User = table.Column<int>(nullable: false)
+                    Commentaire = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clients", x => x.ClientId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Parametres",
-                columns: table => new
-                {
-                    ParametreId = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    NomSociete = table.Column<string>(nullable: false),
-                    Adresse = table.Column<string>(nullable: false),
-                    CodePostal = table.Column<string>(nullable: false),
-                    LieuPostal = table.Column<string>(nullable: false),
-                    NumeroTelephone = table.Column<int>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    Rib = table.Column<string>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    User = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Parametres", x => x.ParametreId);
+                    table.PrimaryKey("PK_Clients", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Clients_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Invoices",
                 columns: table => new
                 {
-                    InvoiceId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(nullable: false),
                     NumeroFacture = table.Column<string>(nullable: false),
                     DateCreation = table.Column<DateTime>(nullable: false),
                     DateEcheance = table.Column<DateTime>(nullable: false),
                     Objet = table.Column<string>(nullable: false),
-                    ClientId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    User = table.Column<int>(nullable: false)
+                    ClientId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Invoices", x => x.InvoiceId);
+                    table.PrimaryKey("PK_Invoices", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Invoices_Clients_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Clients",
-                        principalColumn: "ClientId",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Invoices_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -81,25 +108,30 @@ namespace InvoiceSystem.ApiHost.Migrations
                 name: "InvoiceLines",
                 columns: table => new
                 {
-                    InvoiceLineId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    InvoiceId = table.Column<int>(nullable: false),
                     Libelle = table.Column<string>(nullable: false),
                     Quantite = table.Column<decimal>(nullable: false),
                     MontantHT = table.Column<decimal>(nullable: false),
                     MontantTVA = table.Column<decimal>(nullable: false),
-                    MontantTTC = table.Column<decimal>(nullable: false),
-                    InvoiceId = table.Column<int>(nullable: false)
+                    MontantTTC = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InvoiceLines", x => x.InvoiceLineId);
+                    table.PrimaryKey("PK_InvoiceLines", x => x.Id);
                     table.ForeignKey(
                         name: "FK_InvoiceLines_Invoices_InvoiceId",
                         column: x => x.InvoiceId,
                         principalTable: "Invoices",
-                        principalColumn: "InvoiceId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_UserId",
+                table: "Clients",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InvoiceLines_InvoiceId",
@@ -110,6 +142,11 @@ namespace InvoiceSystem.ApiHost.Migrations
                 name: "IX_Invoices_ClientId",
                 table: "Invoices",
                 column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Invoices_UserId",
+                table: "Invoices",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -125,6 +162,9 @@ namespace InvoiceSystem.ApiHost.Migrations
 
             migrationBuilder.DropTable(
                 name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }
