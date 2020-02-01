@@ -1,49 +1,37 @@
-import { HelperService } from './helper.service';
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { User } from '../models/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+    private currentUserSubject: BehaviorSubject<User>;
+    public currentUser: Observable<User>;
 
-    public getToken(): string {
-        return localStorage.getItem('token');
-      }
-
-    private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-    get isLoggedIn() {
-        return this.loggedIn.asObservable();
+    constructor(private http: HttpClient) {
+        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    baseUrl: string;
-
-    constructor(
-        private http: HttpClient,
-        private helper: HelperService
-        ) {
-            this.baseUrl = helper.getBaseUrl();
-        }
+    public get currentUserValue(): User {
+        return this.currentUserSubject.value;
+    }
 
     login(username: string, password: string) {
-        return this.http.post<any>(this.baseUrl + `/api/Auth/login`, { username, password })
+        return this.http.post<any>(`${environment.apiUrl}/api/users/authenticate`, { username, password })
             .pipe(map(user => {
-                // login successful if there's a jwt token in the response
-                if (user && user.token) {
-                    this.loggedIn.next(true);
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('token', JSON.stringify(user));
-                }
-
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
                 return user;
             }));
     }
 
     logout() {
-        this.loggedIn.next(false);
-
         // remove user from local storage to log user out
-        localStorage.removeItem('token');
+        localStorage.removeItem('currentUser');
+        this.currentUserSubject.next(null);
     }
 }

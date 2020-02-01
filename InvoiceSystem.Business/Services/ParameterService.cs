@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using InvoiceSystem.Business.IRepository;
 using InvoiceSystem.Business.Models;
 
-namespace InvoiceSystem.Business.Services
+namespace InvoiceSystem.Business
 {
     public class ParameterService : IParameterService
     {

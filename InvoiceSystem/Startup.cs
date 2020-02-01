@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using InvoiceSystem.Infrastructure;
+using InvoiceSystem.Auth;
 
 namespace InvoiceSystem
 {
@@ -41,24 +42,30 @@ namespace InvoiceSystem
 
             services.AddTransient<IAuthenticationService, AuthenticationService>();
 
-            services.AddAuthentication(opt => {
-                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddJwtBearer(a =>
+               {
+                   a.Audience = "ExampleAudience";
+                   a.RequireHttpsMetadata = false;
+                   a.IncludeErrorDetails = true;
+                   a.SaveToken = true;
 
-                    ValidIssuer = "https://localhost:5001",
-                    ValidAudience = "https://localhost:5001",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
-                };
-            });
+                   a.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                   {
+                       IssuerSigningKey = TokenAuthOption.Key,
+                       ValidAudience = TokenAuthOption.Audience,
+                       ValidIssuer = TokenAuthOption.Issuer,
+                        // When receiving a token, check that we've signed it.
+                        ValidateIssuerSigningKey = true,
+                        // When receiving a token, check that it is still valid.
+                        ValidateLifetime = true,
+                        // This defines the maximum allowable clock skew - i.e. provides a tolerance on the token expiry time 
+                        // when validating the lifetime. As we're creating the tokens locally and validating them on the same 
+                        // machines which should have synchronised time, this can be set to zero. Where external tokens are
+                        // used, some leeway here could be useful.
+                        //ClockSkew = TimeSpan.FromMinutes(0)
+                   };
+               });
 
             // Make sure you call this previous to AddMvc
             services.AddCors(options =>
@@ -77,10 +84,33 @@ namespace InvoiceSystem
 
             services.AddMvc();
 
-            // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "My API",
+                    Version = "v1"
+                });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please insert JWT with Bearer into field",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                   {
+                     new OpenApiSecurityScheme
+                     {
+                       Reference = new OpenApiReference
+                       {
+                         Type = ReferenceType.SecurityScheme,
+                         Id = "Bearer"
+                       }
+                      },
+                      new string[] { }
+                    }
+                  });
             });
 
 

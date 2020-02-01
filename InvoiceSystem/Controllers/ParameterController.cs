@@ -15,18 +15,24 @@ namespace InvoiceSystem.Controllers
     [Route("api/[controller]")]
     public class ParameterController : Controller
     {
-        private readonly IParameterService _parameterService;
+        //private readonly IParameterService _parameterService;
 
-        public ParameterController(IParameterService parameterService)
-        {
-            _parameterService = parameterService;
-        }
+        //public ParameterController(IParameterService parameterService)
+        //{
+        //    _parameterService = parameterService;
+        //}
+
+        //[HttpGet]
+        //public async Task<ParameterModel> GetAsync() => await _parameterService.GetCompanyParameterAsync();
+
+        //[HttpPut("{parameterId}")]
+        //public void Put(int parameterId, [FromBody]ParameterModel model)
+        //    => _parameterService.UpdateCompanyParameterAsync(parameterId, model);
 
         [HttpGet]
-        public async Task<ParameterModel> GetAsync() => await _parameterService.GetCompanyParameterAsync();
-
-        [HttpPut("{parameterId}")]
-        public void Put(int parameterId, [FromBody]ParameterModel model)
-            => _parameterService.UpdateCompanyParameterAsync(parameterId, model);
+        public async Task<ParameterModel> GetAsync()
+        {
+            return new ParameterModel();
+        }
     }
 }
