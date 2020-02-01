@@ -12,9 +12,7 @@
     <Folder Include="IServices\" />
     <Folder Include="Services\" />
     <Folder Include="IRepository\" />
-    <Folder Include="Models\AuthModel\" />
     <Folder Include="Enums\" />
-    <Folder Include="Entities\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />

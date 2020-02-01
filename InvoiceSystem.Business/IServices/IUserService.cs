@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using InvoiceSystem.Business.Models;
 
 namespace InvoiceSystem.Business.IServices
 {
     public interface IUserService
     {
-        User Authenticate(string username, string password);
-        IEnumerable<User> GetAll();
+        Task<UserModel> AuthenticateAsync(string username, string password);
     }
 }

@@ -65,6 +65,7 @@ namespace InvoiceSystem.ApiHost
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IParameterService, ParameterService>();
             services.AddScoped<IParameterRepository, ParameterRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

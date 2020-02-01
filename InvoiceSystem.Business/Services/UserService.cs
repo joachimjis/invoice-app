@@ -4,7 +4,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 using InvoiceSystem.Business.Helpers;
+using InvoiceSystem.Business.IRepository;
 using InvoiceSystem.Business.IServices;
 using InvoiceSystem.Business.Models;
 using Microsoft.Extensions.Options;
@@ -15,21 +17,29 @@ namespace InvoiceSystem.Business.Services
     public class UserService : IUserService
     {
         // users hardcoded for simplicity, store in a db with hashed passwords in production applications
-        private List<User> _users = new List<User>
-        {
-            new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" }
-        };
+        //private List<User> _users = new List<User>
+        //{
+        //    new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" }
+        //};
 
         private readonly AppSettings _appSettings;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(IOptions<AppSettings> appSettings)
+        public UserService(
+            IOptions<AppSettings> appSettings,
+            IUserRepository userRepository
+            )
         {
             _appSettings = appSettings.Value;
+            _userRepository = userRepository;
         }
 
-        public User Authenticate(string username, string password)
+        public async Task<UserModel> AuthenticateAsync(string username, string password)
         {
-            var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
+            //var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
+            var user = await _userRepository.GetUserAsync(username, password);
+
+            //UserModel user = new UserModel { Username = username, Password = password };
 
             // return null if user not found
             if (user == null)
@@ -51,11 +61,6 @@ namespace InvoiceSystem.Business.Services
             user.Token = tokenHandler.WriteToken(token);
 
             return user.WithoutPassword();
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            return _users.WithoutPasswords();
         }
     }
 }

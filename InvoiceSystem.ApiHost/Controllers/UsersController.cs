@@ -1,4 +1,5 @@
-﻿using InvoiceSystem.Business.IServices;
+﻿using System;
+using InvoiceSystem.Business.IServices;
 using InvoiceSystem.Business.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,21 +22,21 @@ namespace InvoiceSystem.ApiHost.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]AuthenticateModel model)
+        public async System.Threading.Tasks.Task<IActionResult> AuthenticateAsync([FromBody]User model)
         {
-            var user = _userService.Authenticate(model.Username, model.Password);
+            try
+            {
+                var user = await _userService.AuthenticateAsync(model.Username, model.Password);
 
-            if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+                if (user == null)
+                    return BadRequest(new { message = "Username or password is incorrect" });
 
-            return Ok(user);
-        }
-
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var users = _userService.GetAll();
-            return Ok(users);
+                return Ok(user);
+            }
+            catch(Exception ex)
+            {
+                 throw;
+            }
         }
     }
 }

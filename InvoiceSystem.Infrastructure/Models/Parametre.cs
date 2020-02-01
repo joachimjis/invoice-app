@@ -36,6 +36,6 @@ namespace InvoiceSystem.Infrastructure.Models
         public string Rib { get; set; }
 
         [ForeignKey("UserId")]
-        public int User { get; set; }
+        public User User { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InvoiceSystem.Business.Models
 {
-    public class AuthenticateModel
+    public class User
     {
         [Required]
         public string Username { get; set; }
