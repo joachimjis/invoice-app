@@ -34,7 +34,13 @@ export class ParameterComponent implements OnInit {
 
     this.parameterService.getParameter().subscribe(param => {
       this.form.patchValue({
-        cocompanyName: param.CompanyName
+        companyName: param.companyName,
+        address: param.address,
+        postalCode: param.postalCode,
+        postalPlace: param.postalPlace,
+        telephone: param.telephone,
+        email: param.email,
+        rib: param.rib
       });
     });
   }

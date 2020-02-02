@@ -17,9 +17,9 @@ namespace InvoiceSystem.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<ParameterModel> GetParameterAsync()
+        public async Task<ParameterModel> GetParameterAsync(int userId)
         {
-            var parameter = await _context.Parametres.FirstOrDefaultAsync();
+            var parameter = await _context.Parametres.FirstOrDefaultAsync(f => f.UserId == userId);
 
             if (parameter == null)
             {

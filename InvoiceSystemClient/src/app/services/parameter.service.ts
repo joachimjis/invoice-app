@@ -1,6 +1,7 @@
+import { AuthenticationService } from './authentication.service';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,15 +9,17 @@ import { environment } from 'src/environments/environment';
 })
 export class ParameterService {
 
-  baseUrl: string;
+  userId: string;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authenticationService: AuthenticationService
     ) {
-        // this.baseUrl = helper.getBaseUrl();
+      this.userId = this.authenticationService.currentUserValue.id.toString();
     }
 
     getParameter(): Observable<any> {
-      return this.http.get(`${environment.apiUrl}/api/parameters`);
+      const params = new HttpParams().set('userId', this.userId);
+      return this.http.get(`${environment.apiUrl}/api/parameters`, {params});
     }
 }

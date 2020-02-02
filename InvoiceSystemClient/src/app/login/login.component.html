@@ -16,7 +16,8 @@
             <div class="error active" [style.visibility]="isError ? 'visible' : 'hidden'">
                 Invalid user name or password
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button *ngIf="!loading" type="submit" class="btn btn-primary">Login</button>
+            <div *ngIf="loading" class="progress loop"><progress></progress></div>
         </div>
     </form>
 </div>
