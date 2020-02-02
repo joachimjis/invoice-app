@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class MenuComponent implements OnInit {
 
-  // isLoggedIn$: Observable<boolean>;
+  isLoggedIn$: Observable<boolean>;
 
   constructor(
     private authService: AuthenticationService,
@@ -18,7 +18,7 @@ export class MenuComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    // this.isLoggedIn$ = this.authService.isLoggedIn;
+    this.isLoggedIn$ = this.authService.isLoggedIn;
   }
 
   logOut() {
