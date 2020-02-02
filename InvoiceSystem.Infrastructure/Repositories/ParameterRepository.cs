@@ -28,7 +28,7 @@ namespace InvoiceSystem.Infrastructure.Repositories
 
             return new ParameterModel
             {
-                ParametreId = parameter.Id,
+                ParameterId = parameter.Id,
                 CompanyName = parameter.NomSociete,
                 Address = parameter.Adresse,
                 PostalCode = parameter.CodePostal,
@@ -39,9 +39,9 @@ namespace InvoiceSystem.Infrastructure.Repositories
             };
         }
 
-        public async Task UpdateParameterAsync(int id, ParameterModel model)
+        public void UpdateParameter(ParameterModel model)
         {
-            var parameter = await _context.Parametres.FindAsync(id);
+            var parameter = _context.Parametres.Find(model.ParameterId);
             parameter.Adresse = model.Address;
             parameter.CodePostal = model.PostalCode;
             parameter.Email = model.Email;
@@ -51,7 +51,7 @@ namespace InvoiceSystem.Infrastructure.Repositories
             parameter.Rib = model.Rib;
 
             _context.Parametres.Update(parameter);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
         }
     }

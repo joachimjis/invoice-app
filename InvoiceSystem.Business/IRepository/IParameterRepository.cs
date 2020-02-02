@@ -7,7 +7,6 @@ namespace InvoiceSystem.Business.IRepository
     public interface IParameterRepository
     {
         Task<ParameterModel> GetParameterAsync(int userId);
-
-        Task UpdateParameterAsync(int id, ParameterModel model);
+        void UpdateParameter(ParameterModel model);
     }
 }

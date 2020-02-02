@@ -25,8 +25,8 @@ namespace InvoiceSystem.ApiHost.Controllers
         [HttpGet]
         public async Task<ParameterModel> GetAsync([FromQuery] int userId) => await _parameterService.GetCompanyParameterAsync(userId);
 
-        [HttpPut("{parameterId}")]
+        [HttpPut]
         public void Put(int parameterId, [FromBody]ParameterModel model)
-            => _parameterService.UpdateCompanyParameterAsync(parameterId, model);
+            => _parameterService.UpdateCompanyParameter(model);
     }
 }

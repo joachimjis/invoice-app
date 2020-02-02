@@ -7,7 +7,7 @@ namespace InvoiceSystem.Business.Models
         {
         }
 
-        public int ParametreId { get; set; }
+        public int ParameterId { get; set; }
 
         public string CompanyName { get; set; }
 

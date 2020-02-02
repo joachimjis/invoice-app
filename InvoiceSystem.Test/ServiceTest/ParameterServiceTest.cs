@@ -46,13 +46,13 @@ namespace InvoiceSystem.Test
         {
             // arrange
             var parameterModel = Builder<ParameterModel>.CreateNew().Build();
-            _mockParameterRepo.Setup(x => x.UpdateParameterAsync(parameterModel.ParametreId, parameterModel));
+            _mockParameterRepo.Setup(x => x.UpdateParameterAsync(parameterModel.ParameterId, parameterModel));
 
             // act
-            await _sut.UpdateCompanyParameterAsync(parameterModel.ParametreId, parameterModel);
+            await _sut.UpdateCompanyParameterAsync(parameterModel.ParameterId, parameterModel);
 
             // assert
-            _mockParameterRepo.Verify(x => x.UpdateParameterAsync(parameterModel.ParametreId, parameterModel), Times.Once);
+            _mockParameterRepo.Verify(x => x.UpdateParameterAsync(parameterModel.ParameterId, parameterModel), Times.Once);
 
         }
     }

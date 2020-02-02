@@ -9,6 +9,6 @@ namespace InvoiceSystem.Business
     {
         Task<ParameterModel> GetCompanyParameterAsync(int userId);
 
-        Task UpdateCompanyParameterAsync(int id, ParameterModel model);
+        void UpdateCompanyParameter(ParameterModel model);
     }
 }

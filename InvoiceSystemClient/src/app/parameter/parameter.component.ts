@@ -29,7 +29,8 @@ export class ParameterComponent implements OnInit {
       postalPlace: ['', Validators.required],
       telephone: ['', Validators.required],
       email: ['', Validators.required],
-      rib: ['', Validators.required]
+      rib: ['', Validators.required],
+      parameterId:['', Validators.required]
     });
 
     this.parameterService.getParameter().subscribe(param => {
@@ -40,7 +41,8 @@ export class ParameterComponent implements OnInit {
         postalPlace: param.postalPlace,
         telephone: param.telephone,
         email: param.email,
-        rib: param.rib
+        rib: param.rib,
+        parameterId: param.parameterId
       });
     });
   }
@@ -48,7 +50,10 @@ export class ParameterComponent implements OnInit {
   save() {
     this.submitBtnState = ClrLoadingState.LOADING;
 
-    
+    this.parameterService.saveParameter(this.form.value)
+      .subscribe(data => {
+        console.log(data);
+      });
 
     //Submit Logic
     this.submitBtnState = ClrLoadingState.DEFAULT;

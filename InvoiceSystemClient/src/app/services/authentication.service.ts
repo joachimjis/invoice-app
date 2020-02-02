@@ -13,7 +13,10 @@ export class AuthenticationService {
     private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
     get isLoggedIn() {
-        return this.loggedIn.asObservable(); // {2}
+        if (localStorage.getItem('currentUser') !== null) {
+            this.loggedIn.next(true);
+        }
+        return this.loggedIn.asObservable();
     }
 
     constructor(private http: HttpClient) {

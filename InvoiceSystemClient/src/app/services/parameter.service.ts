@@ -22,4 +22,8 @@ export class ParameterService {
       const params = new HttpParams().set('userId', this.userId);
       return this.http.get(`${environment.apiUrl}/api/parameters`, {params});
     }
+
+    saveParameter(parameterModel: any) : Observable<any> {
+      return this.http.put(`${environment.apiUrl}/api/parameters`, parameterModel);
+    }
 }
