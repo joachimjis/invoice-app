@@ -1,14 +1,17 @@
 <!-- <header class="header-6" *ngIf="isLoggedIn$ | async as isLoggedIn"> -->
 <header class="header-6" *ngIf="isLoggedIn$ | async">
     <div class="branding">
-        Iaora Web Solutions
+        <a class="nav-link">
+            <clr-icon shape="home" size="24"></clr-icon>
+            <span class="title">Iaora Web Solutions</span>
+        </a>
     </div>
     <div class="header-nav">
-        <a href="javascript://" class="active nav-link nav-text">Facturation</a>
-        <a href="javascript://" class="nav-link nav-text">Client</a>
+        <a href="javascript://" class="nav-link nav-text">Facturation</a>
+        <a href="javascript://" class="nav-link nav-text" routerLink="/customers" >Client</a>
     </div>
     <div class="header-actions">
-        <a href="javascript://" class="nav-link nav-icon" aria-label="settings" routerLink="/parameter" routerLinkActive="active">
+        <a href="javascript://" class="nav-link nav-icon" aria-label="settings" routerLink="/parameters" routerLinkActive="active">
             <clr-icon shape="cog"></clr-icon>
         </a>
         <a href="javascript://" class="nav-link nav-icon" aria-label="logout" (click)="logOut()">

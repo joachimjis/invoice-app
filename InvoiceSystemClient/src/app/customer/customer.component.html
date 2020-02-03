@@ -1,0 +1,35 @@
+
+<h3>Clients</h3>
+
+<clr-datagrid>
+    <clr-dg-column [clrDgField]="'name'">Nom société</clr-dg-column>
+    <clr-dg-column [clrDgField]="'telephone'"  [clrDgColType]="'number'">Numéro téléphone</clr-dg-column>
+    <clr-dg-column [clrDgField]="'email'">Email</clr-dg-column>
+    <clr-dg-column [clrDgField]="'activitySector'">Secteur activité</clr-dg-column>
+    <clr-dg-column [clrDgField]="'rcs'">RCS</clr-dg-column>
+    <clr-dg-column [clrDgField]="'address'">Adresse Physique</clr-dg-column>
+    <clr-dg-column [clrDgField]="'suburb'">Commune</clr-dg-column>
+    <clr-dg-column [clrDgField]="'island'">Ile</clr-dg-column>
+    <clr-dg-column [clrDgField]="'comments'">Commentaires</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let customer of customers">
+        <clr-dg-cell>{{customer.name}}</clr-dg-cell>
+        <clr-dg-cell>{{customer.telephone}}</clr-dg-cell>
+        <clr-dg-cell>{{customer.email}}</clr-dg-cell>
+        <clr-dg-cell>{{customer.activitySector}}</clr-dg-cell>
+        <clr-dg-cell>{{customer.rcs}}</clr-dg-cell>
+        <clr-dg-cell>{{customer.address}}</clr-dg-cell>
+        <clr-dg-cell>{{customer.suburb}}</clr-dg-cell>
+        <clr-dg-cell>{{customer.island}}</clr-dg-cell>
+        <clr-dg-cell>{{customer.comments}}</clr-dg-cell>
+    </clr-dg-row>
+
+    <!-- <clr-dg-footer>{{customers.length}} Clients</clr-dg-footer> -->
+    <clr-dg-footer>
+        <clr-dg-pagination #pagination [clrDgPageSize]="10">
+            <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Users per page</clr-dg-page-size>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{pagination.totalItems}} users
+        </clr-dg-pagination>
+    </clr-dg-footer>
+</clr-datagrid>
