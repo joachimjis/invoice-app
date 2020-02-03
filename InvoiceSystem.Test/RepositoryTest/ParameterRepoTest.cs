@@ -36,6 +36,7 @@ namespace InvoiceSystem.Test
         {
             // arrange
             var expected = Builder<ParameterModel>.CreateNew().Build();
+            int userId = 1;
 
             await _context.Parametres.AddAsync(new Parametre
             {
@@ -46,13 +47,14 @@ namespace InvoiceSystem.Test
                 Email = expected.Email,
                 LieuPostal = expected.PostalPlace,
                 NumeroTelephone = expected.Telephone,
-                Rib = expected.Rib
+                Rib = expected.Rib,
+                UserId = userId
             });
 
             await _context.SaveChangesAsync();
 
             // act
-            var actual = await _sut.GetParameterAsync();
+            var actual = await _sut.GetParameterAsync(userId);
 
             // assert
             Assert.Equal(expected.CompanyName, actual.CompanyName);

@@ -31,28 +31,30 @@ namespace InvoiceSystem.Test
         {
             // arrange
             var parameterModel = Builder<ParameterModel>.CreateNew().Build();
+            int userId = 1;
 
-            _mockParameterRepo.Setup(x => x.GetParameterAsync()).ReturnsAsync(parameterModel);
+            _mockParameterRepo.Setup(x => x.GetParameterAsync(userId)).ReturnsAsync(parameterModel);
 
             // act
-            var actual = await _sut.GetCompanyParameterAsync();
+            var actual = await _sut.GetCompanyParameterAsync(userId);
 
             // assert
-            _mockParameterRepo.Verify(x => x.GetParameterAsync(), Times.Once);
+            _mockParameterRepo.Verify(x => x.GetParameterAsync(userId), Times.Once);
         }
 
         [Fact]
-        public async Task Should_Update_ParameterAsync()
+        public void Should_Update_ParameterAsync()
         {
             // arrange
             var parameterModel = Builder<ParameterModel>.CreateNew().Build();
-            _mockParameterRepo.Setup(x => x.UpdateParameterAsync(parameterModel.ParameterId, parameterModel));
+
+            _mockParameterRepo.Setup(x => x.UpdateParameter(parameterModel));
 
             // act
-            await _sut.UpdateCompanyParameterAsync(parameterModel.ParameterId, parameterModel);
+            _sut.UpdateCompanyParameter(parameterModel);
 
             // assert
-            _mockParameterRepo.Verify(x => x.UpdateParameterAsync(parameterModel.ParameterId, parameterModel), Times.Once);
+            _mockParameterRepo.Verify(x => x.UpdateParameter(parameterModel), Times.Once);
 
         }
     }
