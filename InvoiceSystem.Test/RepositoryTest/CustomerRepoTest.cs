@@ -69,5 +69,45 @@ namespace InvoiceSystem.Test
             var customers = _context.Clients.ToList();
             Assert.Equal(1, customers.Count);
         }
+
+        [Fact]
+        public async Task Should_Get_Customer_Async()
+        {
+            // arrange
+            int customerId = 2;
+
+            var customer = Builder<Client>.CreateNew().With(d => d.Id = customerId).Build();
+            await _context.Clients.AddAsync(customer);
+            await _context.SaveChangesAsync();
+
+            // act
+            var actual = await _sut.GetCustomerAsync(customerId);
+
+            // assert
+            Assert.NotNull(actual);
+
+            Assert.Equal(customer.NomSociete, actual.Name);
+            Assert.Equal(customer.NumeroTelephone, actual.Telephone);
+            Assert.Equal(customer.Email, actual.Email);
+            Assert.Equal(customer.SecteurActivite, actual.ActivitySector);
+            Assert.Equal(customer.RCS, actual.Rcs);
+            Assert.Equal(customer.AdressePhysique, actual.Address);
+            Assert.Equal(customer.Commune, actual.Suburb);
+            Assert.Equal(customer.Ile, actual.Island);
+            Assert.Equal(customer.Commentaire, actual.Comments);
+        }
+
+        [Fact]
+        public async Task Should_Not_get_Customer_Async()
+        {
+            // arrange
+            int customerId = 2;
+
+            // act
+            var actual = await _sut.GetCustomerAsync(customerId);
+
+            // assert
+            Assert.Null(actual);
+        }
     }
 }

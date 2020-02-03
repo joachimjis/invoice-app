@@ -15,6 +15,7 @@
         <clr-dg-column [clrDgField]="'suburb'">Commune</clr-dg-column>
         <clr-dg-column [clrDgField]="'island'">Ile</clr-dg-column>
         <clr-dg-column [clrDgField]="'comments'">Commentaires</clr-dg-column>
+        <clr-dg-column>Actions</clr-dg-column>
 
         <clr-dg-row *clrDgItems="let customer of customers">
             <clr-dg-cell>{{customer.name}}</clr-dg-cell>
@@ -26,9 +27,18 @@
             <clr-dg-cell>{{customer.suburb}}</clr-dg-cell>
             <clr-dg-cell>{{customer.island}}</clr-dg-cell>
             <clr-dg-cell>{{customer.comments}}</clr-dg-cell>
+            <clr-dg-cell>
+                <div class="btn-group btn-primary btn-icon">
+                    <button class="btn" (click)="edit(customer.id)">
+                        <clr-icon shape="edit" title="Edit"></clr-icon>
+                    </button>
+                    <button class="btn btn-danger">
+                        <clr-icon shape="times" title="delete"></clr-icon>
+                    </button>
+                </div>
+            </clr-dg-cell>
         </clr-dg-row>
 
-        <!-- <clr-dg-footer>{{customers.length}} Clients</clr-dg-footer> -->
         <clr-dg-footer>
             <clr-dg-pagination #pagination [clrDgPageSize]="10">
                 <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Users per page</clr-dg-page-size>

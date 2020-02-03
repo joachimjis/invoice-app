@@ -25,9 +25,9 @@ namespace InvoiceSystem.ApiHost.Controllers
             => await _customerService.GetCustomersAsync(userId);
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<CustomerModel> Get(int id)
         {
-            return "value";
+            return await _customerService.GetCustomerAsync(id);
         }
 
         [HttpPost]

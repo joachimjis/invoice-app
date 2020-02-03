@@ -29,4 +29,8 @@ export class CustomerComponent implements OnInit {
     this.router.navigate(['customer/detail/' + 'new']);
   }
 
+  edit(id: number) {
+    this.isEditing = true;
+    this.router.navigate(['customer/detail/' + id]);
+  }
 }

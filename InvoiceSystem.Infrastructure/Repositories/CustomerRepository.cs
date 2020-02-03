@@ -57,5 +57,30 @@ namespace InvoiceSystem.Infrastructure.Repositories
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task<CustomerModel> GetCustomerAsync(int customerId)
+        {
+            var customer = await _context.Clients.FirstOrDefaultAsync(d => d.Id == customerId);
+
+            if (customer == null)
+            {
+                return null;
+            }
+
+            return new CustomerModel
+            {
+                Id = customer.Id,
+                UserId = customer.UserId,
+                Telephone = customer.NumeroTelephone,
+                Email = customer.Email,
+                Name = customer.NomSociete,
+                Address = customer.AdressePhysique,
+                ActivitySector = customer.SecteurActivite,
+                Suburb = customer.Commune,
+                Island = customer.Ile,
+                Rcs = customer.RCS,
+                Comments = customer.Commentaire
+            };
+        }
     }
 }

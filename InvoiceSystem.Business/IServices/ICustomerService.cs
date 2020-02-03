@@ -10,5 +10,7 @@ namespace InvoiceSystem.Business.IServices
         Task<List<CustomerModel>> GetCustomersAsync(int userId);
 
         Task CreateCustomerAsync(CustomerModel customerModel);
+
+        Task<CustomerModel> GetCustomerAsync(int customerId);
     }
 }

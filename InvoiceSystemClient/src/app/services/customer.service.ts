@@ -24,6 +24,10 @@ export class CustomerService {
       return this.http.get(`${environment.apiUrl}/api/customers`, {params});
     }
 
+    getCustomer(id: number): Observable<any> {
+      return this.http.get(`${environment.apiUrl}/api/customers/` + id);
+    }
+
     postCustomer(value: Customer): Observable<any> {
       value.userId = this.userId;
       return this.http.post(`${environment.apiUrl}/api/customers`, value);
