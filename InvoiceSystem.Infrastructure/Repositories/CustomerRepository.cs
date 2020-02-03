@@ -82,5 +82,22 @@ namespace InvoiceSystem.Infrastructure.Repositories
                 Comments = customer.Commentaire
             };
         }
+
+        public async Task UpdateCustomerAsync(int id, CustomerModel customerModel)
+        {
+            var customer = await _context.Clients.FindAsync(id);
+            customer.NomSociete = customerModel.Name;
+            customer.NumeroTelephone = customerModel.Telephone;
+            customer.Email = customerModel.Email;
+            customer.SecteurActivite = customerModel.ActivitySector;
+            customer.RCS = customerModel.Rcs;
+            customer.AdressePhysique = customerModel.Address;
+            customer.Commune = customerModel.Suburb;
+            customer.Ile = customerModel.Island;
+            customer.Commentaire = customerModel.Comments;
+
+            _context.Update(customer);
+            await _context.SaveChangesAsync();
+        }
     }
 }

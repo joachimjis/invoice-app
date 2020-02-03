@@ -24,5 +24,8 @@ namespace InvoiceSystem.Business.Services
 
         public async Task<CustomerModel> GetCustomerAsync(int customerId)
             => await _customerRepository.GetCustomerAsync(customerId);
+
+        public async Task UpdateCustomerAsync(int id, CustomerModel customerModel)
+            => await _customerRepository.UpdateCustomerAsync(id, customerModel);
     }
 }

@@ -32,4 +32,8 @@ export class CustomerService {
       value.userId = this.userId;
       return this.http.post(`${environment.apiUrl}/api/customers`, value);
     }
+
+    putCustomer(value: Customer): Observable<any> {
+      return this.http.put(`${environment.apiUrl}/api/customers/` + value.id, value);
+    }
 }

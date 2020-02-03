@@ -9,8 +9,10 @@ namespace InvoiceSystem.Business.IRepository
     {
         Task<List<CustomerModel>> GetCustomersAsync(int userId);
 
+        Task<CustomerModel> GetCustomerAsync(int customerId);
+
         Task CreateCustomerAsync(CustomerModel customerModel);
 
-        Task<CustomerModel> GetCustomerAsync(int customerId);
+        Task UpdateCustomerAsync(int id, CustomerModel customerModel);
     }
 }

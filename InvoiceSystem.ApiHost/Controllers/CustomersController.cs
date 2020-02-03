@@ -42,9 +42,8 @@ namespace InvoiceSystem.ApiHost.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        public async Task Put(int id, [FromBody]CustomerModel customerModel)
+            => await _customerService.UpdateCustomerAsync(id, customerModel);
 
         [HttpDelete("{id}")]
         public void Delete(int id)

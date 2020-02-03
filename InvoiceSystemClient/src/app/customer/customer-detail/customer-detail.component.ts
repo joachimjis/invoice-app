@@ -20,6 +20,7 @@ export class CustomerDetailComponent implements OnInit {
 
   errorMessage: string;
   isSuccess = false;
+  isNew = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,6 +49,7 @@ export class CustomerDetailComponent implements OnInit {
       });
     } else {
       this.title = 'Create a customer';
+      this.isSuccess = true;
     }
 
     this.form = this.formBuilder.group({
@@ -71,14 +73,33 @@ export class CustomerDetailComponent implements OnInit {
   save() {
     if (this.canSave) {
       this.submitBtnState = ClrLoadingState.LOADING;
-      this.customerService.postCustomer(this.form.value).subscribe(data => {
-        this.submitBtnState = ClrLoadingState.DEFAULT;
-        this.isSuccess = true;
-      },
-      error => {
-        this.errorMessage = error.error;
-        });
+      
+      if(this.isNew) {
+        this.addCustomer();
+      } else {
+        this.updateCustomer();
+      }
     }
+  }
+
+  addCustomer() {
+    this.customerService.postCustomer(this.form.value).subscribe(data => {
+      this.submitBtnState = ClrLoadingState.DEFAULT;
+      this.isSuccess = true;
+    },
+    error => {
+      this.errorMessage = error.error;
+      });
+  }
+
+  updateCustomer() {
+    this.customerService.putCustomer(this.form.value).subscribe(data => {
+      this.submitBtnState = ClrLoadingState.DEFAULT;
+      this.isSuccess = true;
+    },
+    error => {
+      this.errorMessage = error.error;
+      });
   }
 
   cancel() {
