@@ -55,5 +55,19 @@ namespace InvoiceSystem.Test
             // assert
             Assert.Equal(2, actual.Count);
         }
+
+        [Fact]
+        public async Task Should_Create_CustomerAsync()
+        {
+            // arrange
+            var customerModel = Builder<CustomerModel>.CreateNew().Build();
+
+            // act
+            await _sut.CreateCustomerAsync(customerModel);
+
+            //assert
+            var customers = _context.Clients.ToList();
+            Assert.Equal(1, customers.Count);
+        }
     }
 }

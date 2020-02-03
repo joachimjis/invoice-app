@@ -42,5 +42,20 @@ namespace InvoiceSystem.Test
             // assert
             _mockCustomerRepo.Verify(x => x.GetCustomersAsync(userId), Times.Once);
         }
+
+        [Fact]
+        public async Task Should_Create_Customer()
+        {
+            // arrange
+            var customerModel = Builder<CustomerModel>.CreateNew().Build();
+
+            _mockCustomerRepo.Setup(x => x.CreateCustomerAsync(customerModel));
+
+            // act
+            await _sut.CreateCustomerAsync(customerModel);
+
+            // assert
+            _mockCustomerRepo.Verify(x => x.CreateCustomerAsync(customerModel), Times.Once);
+        }
     }
 }

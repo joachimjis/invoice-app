@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using InvoiceSystem.Business.IServices;
 using InvoiceSystem.Business.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace InvoiceSystem.ApiHost.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class CustomersController : Controller
     {
@@ -31,8 +31,14 @@ namespace InvoiceSystem.ApiHost.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task PostAsync([FromBody] CustomerModel customerModel)
         {
+            if (customerModel.UserId == 0)
+            {
+                 BadRequest();
+            }
+
+            await _customerService.CreateCustomerAsync(customerModel);
         }
 
         [HttpPut("{id}")]

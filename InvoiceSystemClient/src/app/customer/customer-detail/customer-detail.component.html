@@ -1,0 +1,119 @@
+<h3>{{title}}</h3>
+
+<form class="clr-form" [formGroup]="form" (ngSubmit)="save()">
+    <div class="clr-form-control">
+        <label class="clr-control-label">Company name :</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Fill the company name" class="clr-input" formControlName="name"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">Telephone :</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="number" placeholder="Fill the telephone number" class="clr-input" formControlName="telephone"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">Email:</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Input the email" class="clr-input" formControlName="email"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">Activity sector:</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Input the activity sector" class="clr-input" formControlName="activitySector"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">RCS:</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Fill the RCS" class="clr-input" formControlName="rcs"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">Physcial address:</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Fill the physical address" class="clr-input" formControlName="address"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">Commune:</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Fill with the suburb name" class="clr-input" formControlName="suburb"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">Ile:</label>
+        <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+                <input type="text" placeholder="Fill with the island name" class="clr-input" formControlName="island"/>
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr-form-control">
+        <label class="clr-control-label">Comments:</label>
+        <div class="clr-control-container">
+            <textarea clrTextarea placeholder="Fill comments" formControlName="comments"></textarea>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="w3-bar" style="clear: both;">
+        <button [clrLoading]="submitBtnState" type="submit" [disabled]="!canSave" class="btn btn-success-outline ">Save</button>
+        <button class="btn btn-outline " (click)="cancel()">Back</button>
+      </div>
+
+</form>
+
+<div class="alert alert-success" role="alert" *ngIf="isSuccess">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">The customer was successfully created</span>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage?.length > 0">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+            <span class="alert-text">An error has occured</span>
+        </div>
+    </div>
+</div>

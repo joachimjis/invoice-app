@@ -8,5 +8,7 @@ namespace InvoiceSystem.Business.IServices
     public interface ICustomerService
     {
         Task<List<CustomerModel>> GetCustomersAsync(int userId);
+
+        Task CreateCustomerAsync(CustomerModel customerModel);
     }
 }

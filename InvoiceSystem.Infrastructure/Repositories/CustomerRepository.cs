@@ -38,5 +38,24 @@ namespace InvoiceSystem.Infrastructure.Repositories
                 .OrderBy(o => o.Name)
                 .ToListAsync();
             }
+
+        public async Task CreateCustomerAsync(CustomerModel customerModel)
+        {
+            await _context.Clients.AddAsync(new Models.Client
+            {
+                UserId = customerModel.UserId,
+                NomSociete = customerModel.Name,
+                Email = customerModel.Email,
+                AdressePhysique = customerModel.Address,
+                SecteurActivite = customerModel.ActivitySector,
+                Commune = customerModel.Suburb,
+                Ile = customerModel.Island,
+                NumeroTelephone = customerModel.Telephone,
+                RCS = customerModel.Rcs,
+                Commentaire = customerModel.Rcs
+            }); ;
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -1,3 +1,4 @@
+import { CustomerDetailComponent } from './customer/customer-detail/customer-detail.component';
 import { CustomerComponent } from './customer/customer.component';
 import { ParameterComponent } from './parameter/parameter.component';
 import { InvoiceComponent } from './invoice/invoice.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'parameters', component: ParameterComponent, canActivate: [AuthGuard] },
   { path: 'customers', component: CustomerComponent, canActivate: [AuthGuard] },
+  { path: 'customer/detail/:id', component: CustomerDetailComponent, canActivate: [AuthGuard] },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

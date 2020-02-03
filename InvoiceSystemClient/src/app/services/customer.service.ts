@@ -3,23 +3,29 @@ import { Observable } from 'rxjs';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
 import { environment } from 'src/environments/environment';
+import { Customer } from '../models/customer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
 
-  userId: string;
+  userId: number;
 
   constructor(
     private http: HttpClient,
     private authenticationService: AuthenticationService
     ) {
-      this.userId = this.authenticationService.currentUserValue.id.toString();
+      this.userId = this.authenticationService.currentUserValue.id;
     }
 
     getCustomers(): Observable<any> {
-      const params = new HttpParams().set('userId', this.userId);
+      const params = new HttpParams().set('userId', this.userId.toString());
       return this.http.get(`${environment.apiUrl}/api/customers`, {params});
+    }
+
+    postCustomer(value: Customer): Observable<any> {
+      value.userId = this.userId;
+      return this.http.post(`${environment.apiUrl}/api/customers`, value);
     }
 }

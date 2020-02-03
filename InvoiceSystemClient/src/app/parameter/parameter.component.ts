@@ -52,11 +52,8 @@ export class ParameterComponent implements OnInit {
 
     this.parameterService.saveParameter(this.form.value)
       .subscribe(data => {
-        console.log(data);
+        this.submitBtnState = ClrLoadingState.DEFAULT;
       });
-
-    //Submit Logic
-    this.submitBtnState = ClrLoadingState.DEFAULT;
   }
 
 }

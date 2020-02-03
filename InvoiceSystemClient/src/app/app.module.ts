@@ -16,6 +16,7 @@ import { MenuComponent } from './shared/menu/menu.component';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { CustomerComponent } from './customer/customer.component';
+import { CustomerDetailComponent } from './customer/customer-detail/customer-detail.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -29,7 +30,8 @@ export function tokenGetter() {
     InvoiceComponent,
     ParameterComponent,
     MenuComponent,
-    CustomerComponent
+    CustomerComponent,
+    CustomerDetailComponent
   ],
   imports: [
     BrowserModule,

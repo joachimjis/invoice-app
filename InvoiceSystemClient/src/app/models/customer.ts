@@ -5,6 +5,8 @@ export interface Customer {
     telephone: number;
     email: string;
     activitySector: string;
+    rcs: string;
+    address: string;
     suburb: string;
     island: string;
     comments: string;
