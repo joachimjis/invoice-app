@@ -32,7 +32,7 @@
                     <button class="btn" (click)="edit(customer.id)">
                         <clr-icon shape="edit" title="Edit"></clr-icon>
                     </button>
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" (click)="delete(customer.id)" [disabled]="canDelete" >
                         <clr-icon shape="times" title="delete"></clr-icon>
                     </button>
                 </div>

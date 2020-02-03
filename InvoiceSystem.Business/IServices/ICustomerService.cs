@@ -14,5 +14,9 @@ namespace InvoiceSystem.Business.IServices
         Task CreateCustomerAsync(CustomerModel customerModel);
 
         Task UpdateCustomerAsync(int id, CustomerModel customerModel);
+
+        Task<bool> CheckIfCanDeleteCustomerAsync(int id);
+
+        Task<bool> DeleteCustomerAsync(int id);
     }
 }

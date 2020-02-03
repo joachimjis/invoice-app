@@ -14,5 +14,9 @@ namespace InvoiceSystem.Business.IRepository
         Task CreateCustomerAsync(CustomerModel customerModel);
 
         Task UpdateCustomerAsync(int id, CustomerModel customerModel);
+
+        Task<int> CountCustomerInvoices(int id);
+
+        void DeleteCustomer(int id);
     }
 }

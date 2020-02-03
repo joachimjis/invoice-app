@@ -99,5 +99,15 @@ namespace InvoiceSystem.Infrastructure.Repositories
             _context.Update(customer);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<int> CountCustomerInvoices(int id)
+            => await _context.Invoices.Where(w => w.ClientId == id).CountAsync();
+
+        public void DeleteCustomer(int id)
+        {
+            var customer = _context.Clients.Find(id);
+            _context.Clients.Remove(customer);
+            _context.SaveChanges();
+        }
     }
 }

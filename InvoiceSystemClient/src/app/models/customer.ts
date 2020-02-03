@@ -10,4 +10,5 @@ export interface Customer {
     suburb: string;
     island: string;
     comments: string;
+    CanDelete: boolean;
 }

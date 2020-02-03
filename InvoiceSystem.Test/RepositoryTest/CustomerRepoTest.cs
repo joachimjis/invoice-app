@@ -109,35 +109,5 @@ namespace InvoiceSystem.Test
             // assert
             Assert.Null(actual);
         }
-
-        [Fact]
-        public async Task Should_Update_Customer_Async()
-        {
-            // arrange
-            int customerId = 2;
-
-            var customer = Builder<Client>.CreateNew().With(d => d.Id = customerId).Build();
-            await _context.Clients.AddAsync(customer);
-            await _context.SaveChangesAsync();
-
-            var expected = Builder<CustomerModel>.CreateNew().With(d => d.Id = customerId).Build();
-
-            // act
-            await _sut.UpdateCustomerAsync(customerId, expected);
-
-            // assert
-
-            var actual = await _context.Clients.FirstOrDefaultAsync(f => f.Id == customerId)
-;
-            Assert.Equal(expected.Name, actual.NomSociete);
-            Assert.Equal(expected.Telephone, actual.NumeroTelephone);
-            Assert.Equal(expected.Email, actual.Email);
-            Assert.Equal(expected.ActivitySector, actual.Commune);
-            Assert.Equal(expected.Rcs, actual.RCS);
-            Assert.Equal(expected.Address, actual.AdressePhysique);
-            Assert.Equal(expected.Suburb, actual.Commune);
-            Assert.Equal(expected.Island, actual.Ile);
-            Assert.Equal(expected.Comments, actual.Commentaire);
-        }
     }
 }

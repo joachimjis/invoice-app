@@ -14,6 +14,7 @@ export class CustomerComponent implements OnInit {
 
   customers: Customer[] = [];
   isEditing: boolean;
+  canDelete: boolean;
 
   constructor(
     private customerService: CustomerService,
@@ -21,6 +22,10 @@ export class CustomerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.load();
+  }
+
+  load() {
     this.customerService.getCustomers().subscribe(data => this.customers = data);
   }
 
@@ -32,5 +37,14 @@ export class CustomerComponent implements OnInit {
   edit(id: number) {
     this.isEditing = true;
     this.router.navigate(['customer/detail/' + id]);
+  }
+
+  delete(id: number) {
+    this.customerService.deleteCustomer(id).subscribe(data => {
+      this.load();
+    },
+    error => {
+      alert('An error has occured with the following message : ' + error.error);
+    });
   }
 }

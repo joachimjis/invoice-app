@@ -73,7 +73,7 @@ export class CustomerDetailComponent implements OnInit {
   save() {
     if (this.canSave) {
       this.submitBtnState = ClrLoadingState.LOADING;
-      
+
       if(this.isNew) {
         this.addCustomer();
       } else {

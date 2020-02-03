@@ -46,8 +46,15 @@ namespace InvoiceSystem.ApiHost.Controllers
             => await _customerService.UpdateCustomerAsync(id, customerModel);
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
+            var result = await _customerService.DeleteCustomerAsync(id);
+
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

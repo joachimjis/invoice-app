@@ -14,5 +14,6 @@ namespace InvoiceSystem.Business.Models
         public string Suburb { get; set; }
         public string Island { get; set; }
         public string Comments { get; set; }
+        public bool CanDelete { get; set; }
     }
 }
