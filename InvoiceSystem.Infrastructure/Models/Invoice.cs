@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using InvoiceSystem.Business.Enums;
 
 namespace InvoiceSystem.Infrastructure.Models
 {
@@ -27,6 +28,8 @@ namespace InvoiceSystem.Infrastructure.Models
 
         [Required]
         public int ClientId { get; set; }
+
+        public InvoiceStatusEnum InvoiceStatus { get; set; }
 
         public Client Client { get; set; }
 

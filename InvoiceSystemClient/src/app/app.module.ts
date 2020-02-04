@@ -39,24 +39,9 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    // JwtModule.forRoot({
-    //   config: {
-    //     tokenGetter: tokenGetter,
-    //     whitelistedDomains: ['localhost:5000'],
-    //     blacklistedRoutes: []
-    //   }
-    // }),
     ClarityModule,
     BrowserAnimationsModule
   ],
-  // providers: [
-  //   AuthGuard,
-  //   {
-  //     provide: HTTP_INTERCEPTORS,
-  //     useClass: TokenInterceptor,
-  //     multi: true,
-  //   }
-  // ],
   providers: [
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
