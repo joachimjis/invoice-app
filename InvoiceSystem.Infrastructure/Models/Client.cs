@@ -23,7 +23,6 @@ namespace InvoiceSystem.Infrastructure.Models
         [Required]
         public string RCS { get; set; }
 
-        [Required]
         public string AdressePhysique { get; set; }
 
         [Required]

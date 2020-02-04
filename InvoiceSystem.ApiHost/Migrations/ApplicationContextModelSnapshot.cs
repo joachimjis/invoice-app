@@ -27,7 +27,6 @@ namespace InvoiceSystem.ApiHost.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("AdressePhysique")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Commentaire")

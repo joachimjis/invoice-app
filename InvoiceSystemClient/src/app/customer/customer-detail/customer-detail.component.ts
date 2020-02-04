@@ -49,7 +49,7 @@ export class CustomerDetailComponent implements OnInit {
       });
     } else {
       this.title = 'Create a customer';
-      this.isSuccess = true;
+      this.isNew = true;
     }
 
     this.form = this.formBuilder.group({
@@ -57,7 +57,7 @@ export class CustomerDetailComponent implements OnInit {
       name: ['', Validators.required],
       telephone: [''],
       email: ['', Validators.required],
-      address: ['', Validators.required],
+      address: [''],
       activitySector: ['', Validators.required],
       rcs: ['', Validators.required],
       suburb: ['', Validators.required],
