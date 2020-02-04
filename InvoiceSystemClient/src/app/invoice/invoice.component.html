@@ -5,19 +5,23 @@
     </div>
 
     <clr-datagrid  style="clear: both;">
-        <clr-dg-column [clrDgField]="'invoiceNumber'">Numéro de facture</clr-dg-column>
-        <clr-dg-column [clrDgField]="'invoiceStatus'">Statut</clr-dg-column>
         <clr-dg-column [clrDgField]="'dateCreation'"  [clrDgColType]="'number'">Date de création</clr-dg-column>
-        <clr-dg-column [clrDgField]="'datEcheance'">Date Echéance</clr-dg-column>
+        <clr-dg-column [clrDgField]="'invoiceNumber'">Numéro de facture</clr-dg-column>
+        <clr-dg-column [clrDgField]="'customerName'">Nom du client</clr-dg-column>
         <clr-dg-column [clrDgField]="'object'">Objet</clr-dg-column>
+        <clr-dg-column [clrDgField]="'montantTTC'">Montant TTC</clr-dg-column>
+        <clr-dg-column [clrDgField]="'invoiceStatus'">Statut</clr-dg-column>
+        <clr-dg-column [clrDgField]="'datEcheance'">Date Echéance</clr-dg-column>
         <clr-dg-column>Actions</clr-dg-column>
 
         <clr-dg-row *clrDgItems="let invoice of invoices">
-            <clr-dg-cell>{{invoice.invoiceNumber}}</clr-dg-cell>
-            <clr-dg-cell>{{getInvoiceStatus(invoice.invoiceStatus)}}</clr-dg-cell>
             <clr-dg-cell>{{invoice.dateCreation | date:'dd/MM/yyyy'}}</clr-dg-cell>
-            <clr-dg-cell>{{invoice.dateEcheance | date:'dd/MM/yyyy'}}</clr-dg-cell>
+            <clr-dg-cell>{{invoice.invoiceNumber}}</clr-dg-cell>
+            <clr-dg-cell>{{invoice.customerName}}</clr-dg-cell>
             <clr-dg-cell>{{invoice.object}}</clr-dg-cell>
+            <clr-dg-cell>{{invoice.montantTTC}}</clr-dg-cell>
+            <clr-dg-cell>{{getInvoiceStatus(invoice.invoiceStatus)}}</clr-dg-cell>
+            <clr-dg-cell>{{invoice.dateEcheance | date:'dd/MM/yyyy'}}</clr-dg-cell>
             <clr-dg-cell>
                 <div class="btn-group btn-primary btn-icon">
                     <button class="btn" (click)="view(invoice.invoiceId)">

@@ -13,6 +13,8 @@ namespace InvoiceSystem.Business.Models
         public DateTime DateEcheance { get; set; }
         public InvoiceStatusEnum InvoiceStatus { get; set; }
         public string Object { get; set; }
+        public string CustomerName { get; set; }
+        public decimal MontantTTC { get; set; }
         public int CustomerId { get; set; }
         public List<InvoiceLine> InvoiceLines { get; set; }
     }

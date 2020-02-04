@@ -62,5 +62,11 @@ namespace InvoiceSystem.Infrastructure.Repositories
                 InvoiceStatus = inv.InvoiceStatus
             }).FirstOrDefaultAsync();
         }
+
+        public async Task<decimal> GetTotalMontantTTC(int invoiceId)
+        {
+            return await _context.InvoiceLines.Where(w => w.InvoiceId == invoiceId)
+                .SumAsync(s => s.MontantTTC);
+        }
     }
 }

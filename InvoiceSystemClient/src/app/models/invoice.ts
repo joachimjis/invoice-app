@@ -7,6 +7,8 @@ export interface Invoice {
     invoiceStatus: number;
     object: string;
     customerId: number;
+    customerName: string;
+    montantTTC: number;
     invoiceLines: InvoiceLine[];
 }
 
