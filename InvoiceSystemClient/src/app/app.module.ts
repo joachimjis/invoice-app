@@ -21,6 +21,7 @@ import { InvoiceCreateComponent } from './invoice/invoice-create/invoice-create.
 
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { InvoiceEditComponent } from './invoice/invoice-edit/invoice-edit.component';
 
 registerLocaleData(localeFr);
 
@@ -38,7 +39,8 @@ export function tokenGetter() {
     MenuComponent,
     CustomerComponent,
     CustomerDetailComponent,
-    InvoiceCreateComponent
+    InvoiceCreateComponent,
+    InvoiceEditComponent
   ],
   imports: [
     BrowserModule,

@@ -58,7 +58,11 @@ namespace InvoiceSystem.Infrastructure.Repositories
                 InvoiceId = inv.Id,
                 Object = inv.Objet,
                 UserId = inv.UserId,
-                InvoiceStatus = inv.InvoiceStatus
+                InvoiceStatus = inv.InvoiceStatus,
+                CustomerName = inv.Client.NomSociete,
+                MontantHT = inv.MontantHT,
+                MontantTTC = inv.MontantTTC,
+                MontantTVA = inv.MontantTVA
             }).FirstOrDefaultAsync();
         }
 
