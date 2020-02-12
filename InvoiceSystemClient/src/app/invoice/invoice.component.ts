@@ -2,6 +2,7 @@ import { InvoiceLine, Invoice } from './../models/invoice';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InvoiceService } from '../services/invoice.service';
+import { Router } from '@angular/router';
 
 enum InvoiceStatus {
   NonPaye,
@@ -28,7 +29,8 @@ export class InvoiceComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private invoiceService: InvoiceService
+    private invoiceService: InvoiceService,
+    private router: Router,
     ) { }
 
   ngOnInit() {
@@ -54,7 +56,11 @@ export class InvoiceComponent implements OnInit {
     }
   }
 
-  view(id: number) {
+  create() {
+    this.router.navigate(['invoice/create/']);
+  }
 
+  view(id: number) {
+    this.router.navigate(['invoice/detail/' + id]);
   }
 }

@@ -3,15 +3,17 @@ using System;
 using InvoiceSystem.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace InvoiceSystem.ApiHost.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20200206061944_update-invoice")]
+    partial class updateinvoice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,6 +137,9 @@ namespace InvoiceSystem.ApiHost.Migrations
                     b.Property<decimal>("Quantite")
                         .HasColumnType("numeric");
 
+                    b.Property<decimal>("TauxTVA")
+                        .HasColumnType("numeric");
+
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("numeric");
 
@@ -243,7 +248,7 @@ namespace InvoiceSystem.ApiHost.Migrations
             modelBuilder.Entity("InvoiceSystem.Infrastructure.Models.InvoiceLine", b =>
                 {
                     b.HasOne("InvoiceSystem.Infrastructure.Models.Invoice", "Invoice")
-                        .WithMany("InvoiceLines")
+                        .WithMany()
                         .HasForeignKey("InvoiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

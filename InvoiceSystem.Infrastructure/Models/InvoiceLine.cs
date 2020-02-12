@@ -24,10 +24,7 @@ namespace InvoiceSystem.Infrastructure.Models
         public decimal MontantHT { get; set; }
 
         [Required]
-        public decimal MontantTVA { get; set; }
-
-        [Required]
-        public decimal MontantTTC { get; set; }
+        public decimal UnitPrice { get; set; }
 
         [ForeignKey("InvoiceId")]
         public Invoice Invoice { get; set; }

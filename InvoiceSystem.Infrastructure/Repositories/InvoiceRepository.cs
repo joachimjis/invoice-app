@@ -41,10 +41,9 @@ namespace InvoiceSystem.Infrastructure.Repositories
                     Label = line.Libelle,
                     Quantity = line.Quantite,
                     MontantHT = line.MontantHT,
-                    MontantTVA = line.MontantTVA,
-                    MontantTTC = line.MontantTTC,
-                    InvoiceId = line.InvoiceId,
-                    InvoiceLineId = line.Id
+                    UnitPrice = line.UnitPrice,
+                    //InvoiceId = line.InvoiceId,
+                    //InvoiceLineId = line.Id
                 }).ToListAsync();
         }
 
@@ -65,8 +64,46 @@ namespace InvoiceSystem.Infrastructure.Repositories
 
         public async Task<decimal> GetTotalMontantTTC(int invoiceId)
         {
-            return await _context.InvoiceLines.Where(w => w.InvoiceId == invoiceId)
-                .SumAsync(s => s.MontantTTC);
+            var invoice = await _context.Invoices.Where(w => w.Id == invoiceId).FirstOrDefaultAsync();
+            return invoice.MontantTTC;
+        }
+
+        public async Task CreateInvoice(InvoiceModel invoiceModel)
+        {
+            List<Models.InvoiceLine> invoiceLines = new List<Models.InvoiceLine>();
+
+            foreach (var line in invoiceModel.InvoiceLines)
+            {
+                invoiceLines.Add(new Models.InvoiceLine
+                {
+                    Libelle = line.Label,
+                    Quantite = line.Quantity,
+                    MontantHT = line.MontantHT,
+                    UnitPrice = line.UnitPrice
+                });
+            }
+
+            await _context.Invoices.AddAsync(new Models.Invoice
+            {
+                NumeroFacture = invoiceModel.InvoiceNumber,
+                DateCreation = invoiceModel.DateCreation,
+                DateEcheance = invoiceModel.DateEcheance,
+                Objet = invoiceModel.Object,
+                ClientId = invoiceModel.CustomerId,
+                InvoiceStatus = Business.Enums.InvoiceStatusEnum.NonPaye,
+                UserId = invoiceModel.UserId,
+                MontantHT = invoiceModel.MontantHT,
+                MontantTVA = invoiceModel.MontantTVA,
+                MontantTTC = invoiceModel.MontantTTC,
+                InvoiceLines = invoiceLines
+            });
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<string> GetLastInvoiceNumber()
+        {
+            return await _context.Invoices.MaxAsync(s => s.NumeroFacture);
         }
     }
 }

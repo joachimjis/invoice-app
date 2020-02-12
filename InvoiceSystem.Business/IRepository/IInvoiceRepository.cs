@@ -14,5 +14,9 @@ namespace InvoiceSystem.Business.IRepository
         Task<List<InvoiceLine>> GetInvoiceLines(int invoiceId);
 
         Task<decimal> GetTotalMontantTTC(int invoiceId);
+
+        Task CreateInvoice(InvoiceModel invoiceModel);
+
+        Task<string> GetLastInvoiceNumber();
     }
 }

@@ -40,5 +40,35 @@ namespace InvoiceSystem.Business.Services
 
             return invoice;
         }
+
+        public async Task<string> GetNextInvoiceNumber()
+        {
+            var lastInvoiceNumber = await _invoiceRepository.GetLastInvoiceNumber();
+
+            if (string.IsNullOrEmpty(lastInvoiceNumber))
+            {
+                return DateTime.Now.Year + "001";
+            }
+            else
+            {
+                int year = Int32.Parse(lastInvoiceNumber.Substring(0, 4));
+                int nextNumber = Int32.Parse(lastInvoiceNumber.Substring(4)) + 1;
+
+                if (year < DateTime.Now.Year)
+                {
+                    return DateTime.Now.Year + "001";
+                }
+                else
+                {
+                    return year + nextNumber.ToString().PadLeft(3, '0');
+                }
+            }
+        }
+
+        public async Task CreateInvoice(InvoiceModel invoiceModel)
+        {
+            invoiceModel.InvoiceNumber = await GetNextInvoiceNumber();
+            await _invoiceRepository.CreateInvoice(invoiceModel);
+        }
     }
 }

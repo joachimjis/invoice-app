@@ -15,18 +15,17 @@ namespace InvoiceSystem.Business.Models
         public string Object { get; set; }
         public string CustomerName { get; set; }
         public decimal MontantTTC { get; set; }
+        public decimal MontantTVA { get; set; }
+        public decimal MontantHT { get; set; }
         public int CustomerId { get; set; }
         public List<InvoiceLine> InvoiceLines { get; set; }
     }
 
     public class InvoiceLine
     {
-        public int InvoiceLineId { get; set; }
-        public int InvoiceId { get; set; }
         public string Label { get; set; }
         public decimal Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
         public decimal MontantHT { get; set; }
-        public decimal MontantTVA { get; set; }
-        public decimal MontantTTC { get; set; }
     }
 }

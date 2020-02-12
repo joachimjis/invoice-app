@@ -30,7 +30,7 @@ export class CustomerDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.route.snapshot.params['id'] !== 'new') {
+    if (this.route.snapshot.params['id'] !== 'new') {
       this.id = this.route.snapshot.params['id'];
       this.title = 'Edit a customer';
       this.customerService.getCustomer(this.id).subscribe(customer => {

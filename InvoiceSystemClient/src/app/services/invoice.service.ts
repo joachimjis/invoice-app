@@ -1,3 +1,4 @@
+import { Invoice } from './../models/invoice';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
@@ -23,7 +24,15 @@ export class InvoiceService {
       return this.http.get(`${environment.apiUrl}/api/invoices`, {params});
     }
 
-    getInvoice(id: number): Observable<any> {
-      return this.http.get(`${environment.apiUrl}/api/invoices/` + id);
+    getInvoice(id: number): Observable<Invoice> {
+      return this.http.get<Invoice>(`${environment.apiUrl}/api/invoices/` + id);
+    }
+
+    postInvoice(value: Invoice): Observable<any> {
+      value.userId = this.userId;
+      value.dateCreation = new Date(value.dateCreation);
+      value.dateEcheance = new Date(value.dateEcheance);
+      value.customerId = Number(value.customerId);
+      return this.http.post(`${environment.apiUrl}/api/invoices`, value);
     }
 }

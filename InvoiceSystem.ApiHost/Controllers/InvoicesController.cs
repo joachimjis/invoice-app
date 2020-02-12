@@ -28,8 +28,9 @@ namespace InvoiceSystem.ApiHost.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task Post([FromBody]InvoiceModel invoiceModel)
         {
+            await _invoiceService.CreateInvoice(invoiceModel);
         }
 
         // PUT api/values/5

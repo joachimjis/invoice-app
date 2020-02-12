@@ -9,5 +9,7 @@ namespace InvoiceSystem.Business.IServices
     {
         Task<List<InvoiceModel>> GetInvoices(int userId);
         Task<InvoiceModel> GetInvoiceInformation(int invoiceId);
+        Task<string> GetNextInvoiceNumber();
+        Task CreateInvoice(InvoiceModel invoiceModel);
     }
 }

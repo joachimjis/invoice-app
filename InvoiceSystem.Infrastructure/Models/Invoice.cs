@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using InvoiceSystem.Business.Enums;
@@ -31,9 +32,17 @@ namespace InvoiceSystem.Infrastructure.Models
 
         public InvoiceStatusEnum InvoiceStatus { get; set; }
 
+        public decimal MontantHT { get; set; }
+
+        public decimal MontantTVA { get; set; }
+
+        public decimal MontantTTC { get; set; }
+
         public Client Client { get; set; }
 
         [ForeignKey("UserId")]
         public User User { get; set; }
+
+        public List<InvoiceLine> InvoiceLines { get; set; }
     }
 }

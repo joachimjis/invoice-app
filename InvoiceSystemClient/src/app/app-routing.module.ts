@@ -1,3 +1,4 @@
+
 import { CustomerDetailComponent } from './customer/customer-detail/customer-detail.component';
 import { CustomerComponent } from './customer/customer.component';
 import { ParameterComponent } from './parameter/parameter.component';
@@ -7,11 +8,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/authguard.service';
+import { InvoiceCreateComponent } from './invoice/invoice-create/invoice-create.component';
 
 
 const routes: Routes = [
   { path: '', component: InvoiceComponent, canActivate: [AuthGuard] },
-  { path: 'invoice', component: InvoiceComponent, canActivate: [AuthGuard] },
+  { path: 'invoices', component: InvoiceComponent, canActivate: [AuthGuard] },
+  { path: 'invoice/create', component: InvoiceCreateComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'parameters', component: ParameterComponent, canActivate: [AuthGuard] },
   { path: 'customers', component: CustomerComponent, canActivate: [AuthGuard] },
